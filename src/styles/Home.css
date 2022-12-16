@@ -1,0 +1,32 @@
+.home {
+  background-color: pink;
+  height: 100vh;
+}
+
+.title {
+  font-size:30px;
+  background: #4449cf;
+  background: linear-gradient(
+    circle farthest-corner at center center,
+    #4449cf 0%,
+    #4d96cf 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description{
+    font-size:medium;
+    margin: auto;
+    height: auto;
+    max-width: 600px;
+    color: #175483;
+    text-shadow: 1px 1  px rgb(232, 195, 195);
+}
+
+
+@media screen and (max-width: 600px){
+    .description{
+        max-width: 350px;
+    }
+}
