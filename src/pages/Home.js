@@ -21,11 +21,13 @@ const Home = () => {
         <h2>This is A website for making to do lists</h2>
         <h2>You can click on the create button below to get started</h2>
       </div>
-      <div className ="arrow">
-        <ArrowDownwardIcon />
+      <div className="arrow">
+        <ArrowDownwardIcon sx={{ fontSize: "80px", color: "#6023bb",padding:"10px"}} />
       </div>
-      <div className="createButton">
-        <button onClick={createClickHandler}>Create</button>
+      <div>
+        <button className="createBtn" onClick={createClickHandler}>
+          Create
+        </button>
       </div>
     </div>
   );
