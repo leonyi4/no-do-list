@@ -1,40 +1,31 @@
-import UploadIcon from '@mui/icons-material/Upload';
+import axios from "axios";
 import React from "react";
-
+import Form from "../components/Form";
+import "../styles/Create.css";
 
 const Create = () => {
+  const addToDoHandler = (toDo) => {
+    console.log(toDo.title,toDo.importance,toDo.desc,toDo.date);
+
+    axios.post(
+      "https://todolist-9f57e-default-rtdb.asia-southeast1.firebasedatabase.app/toDos.json",
+      {
+        title: toDo.title,
+        desc: toDo.desc,
+        importance: toDo.importance,
+        date: toDo.date,
+      }
+    ).then(function (response){
+      console.log(response)
+    }).catch(function (error){
+      alert(error)
+    });
+  };
+
   return (
-    <form>
-      <label htmlFor="newToDo-Title">Enter the To Do Title</label>
-      <div clasName="newToDo-Title">
-        <input
-          type="text"
-          id="newToDo-Title"
-          // value={newToDoTitle}
-          placeholder="Enter the To Do Title"
-        />
-      </div>
-      <label htmlFor="newToDo-Desc">Enter description</label>
-      <div clasName="newToDo-Desc">
-        <input
-          type="text"
-          id="newToDo-Desc"
-          // value={newToDoDesc}
-          placeholder="Enter the To Do Description"
-        />
-      </div>
-      <div className="urgent">
-        <input type="radio" id="high" name="importance" value="HIGH"/>
-        <label for="high">High</label>
-        <input type="radio" id="middle" name="importance" value="MIDDLE"/>
-        <label for="middle">Middle</label>
-        <input type="radio" name="importance" value="LOW"/>
-        <label for="low">Low</label>
-      </div>
-      <button className="submit">
-        <UploadIcon/>
-      </button>
-    </form>
+    <div className="card">
+      <Form onAddToDos={addToDoHandler} />
+    </div>
   );
 };
 

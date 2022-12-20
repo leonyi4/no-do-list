@@ -1,0 +1,25 @@
+.card{
+    height: 100vh;
+    background-color: cadetblue;
+}
+.form {
+  width: 40rem;
+  padding: 50px 0;
+  margin: auto;
+  border: 2px solid black;
+}
+
+label {
+  font-size: larger;
+}
+
+input {
+  margin: 5px;
+  padding: 5px 5px;
+}
+
+input[type="text"] {
+  margin: 5px;
+  padding: 5px 5px;
+  width: 50%;
+}
