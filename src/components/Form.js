@@ -21,6 +21,7 @@ const Form = (props) => {
       desc: descRef.current.value,
       importance: selected,
       date: date,
+      completed: false,
     };
 
     props.onAddToDos(toDos);
