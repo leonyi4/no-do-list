@@ -1,4 +1,19 @@
-.view{
-    background-color: Blue;
-    height: 100vh;
+.view {
+  background-color: rgb(54, 85, 209);
+  height: 100vh;
+}
+
+.toDoList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.toDo {
+  overflow: hidden;
+  border-radius: 10px;
+  width: 50%;
+  background-color: white;
 }

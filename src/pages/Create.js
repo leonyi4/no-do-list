@@ -5,7 +5,7 @@ import "../styles/Create.css";
 
 const Create = () => {
   const addToDoHandler = (toDo) => {
-    console.log(toDo.title,toDo.importance,toDo.desc,toDo.date);
+
 
     axios.post(
       "https://todolist-9f57e-default-rtdb.asia-southeast1.firebasedatabase.app/toDos.json",
@@ -16,7 +16,6 @@ const Create = () => {
         date: toDo.date,
       }
     ).then(function (response){
-      console.log(response)
     }).catch(function (error){
       alert(error)
     });

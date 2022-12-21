@@ -5,9 +5,7 @@ import React, { useRef, useState } from "react";
 const Form = (props) => {
   const [selected, setSelected] = useState();
 
-  const handleClick = (e) => {
-    setSelected(e.target.id);
-  };
+
   const titleRef = useRef("");
   const descRef = useRef("");
 
@@ -23,6 +21,7 @@ const Form = (props) => {
       date: date,
       completed: false,
     };
+    console.log(toDos)
 
     props.onAddToDos(toDos);
   };
@@ -51,7 +50,7 @@ const Form = (props) => {
       </div>
       <div className="urgent">
         <input
-          onClick={handleClick}
+          onClick={e => setSelected(1)}
           type="radio"
           id="high"
           name="importance"
@@ -59,7 +58,7 @@ const Form = (props) => {
         />
         <label htmlFor="high">High</label>
         <input
-          onClick={handleClick}
+          onClick={e => setSelected(2)}
           type="radio"
           id="middle"
           name="importance"
@@ -67,7 +66,7 @@ const Form = (props) => {
         />
         <label htmlFor="middle">Middle</label>
         <input
-          onClick={handleClick}
+          onClick={e => setSelected(3)}
           type="radio"
           id="low"
           name="importance"
