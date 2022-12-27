@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer";
 const ToDo = (props) => {
   const handleDelete = (event) => {
     console.log(props.completed);
-    props.onHandleDelete(props);
+    // props.onHandleDelete(props);
   };
 
   const { ref, inView } = useInView({

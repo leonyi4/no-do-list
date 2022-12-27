@@ -1,7 +1,7 @@
-import React from "react";
 import ToDo from "./ToDo";
 
 const ToDoList = (props) => {
+  
   let content = props.toDos
     .filter((toDo) => toDo.completed !== true)
     .sort((a, b) => {
@@ -16,7 +16,7 @@ const ToDoList = (props) => {
         title={toDo.title}
         desc={toDo.desc}
         importance={toDo.importance}
-        onHandleDelete={props.onHandleDelete}
+        // onHandleDelete={props.onHandleDelete}
       />
     ));
 
