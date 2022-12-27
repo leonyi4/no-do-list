@@ -15,14 +15,15 @@ const View = () => {
           "https://todolist-9f57e-default-rtdb.asia-southeast1.firebasedatabase.app/toDos.json"
         );
         const loadedToDos = [];
-        for(const key in response){
+        for (const key in response) {
           loadedToDos.push({
-            id:key,
-            title:response[key].title,
-            desc:response[key].desc,
+            id: key,
+            title: response[key].title,
+            desc: response[key].desc,
             importance: response[key].importance,
-            date: response[key].date
-          })
+            date: response[key].date,
+            completed: response[key].completed,
+          });
         }
         setToDos(loadedToDos);
       } catch (error) {
@@ -34,12 +35,30 @@ const View = () => {
     fetchData();
   }, []);
 
-  
+  const deleteHandler = (toDo) => {
+    console.log(toDo);
+    const newToDo = {
+      id: toDo.id,
+      title: toDo.title,
+      desc: toDo.desc,
+      importance: toDo.importance,
+      date: toDo.date,
+      completed: true,
+    };
+
+    axios
+      .put(
+        `https://todolist-9f57e-default-rtdb.asia-southeast1.firebasedatabase.app/toDos/${toDo.id}`,
+        newToDo
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="view">
       {isLoading && <div>Loading</div>}
-      {!isLoading && <ToDoList toDos={toDos}/>}
+      {!isLoading && <ToDoList onHandleDelete={deleteHandler} toDos={toDos} />}
     </div>
   );
 };

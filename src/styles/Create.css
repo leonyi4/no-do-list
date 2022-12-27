@@ -1,5 +1,6 @@
 .card{
-    height: 100vh;
+    padding-top: 10vh;
+    height: 90vh;
     background-color: cadetblue;
 }
 .form {
@@ -7,6 +8,8 @@
   padding: 50px 0;
   margin: auto;
   border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
 }
 
 label {
@@ -23,3 +26,4 @@ input[type="text"] {
   padding: 5px 5px;
   width: 50%;
 }
+

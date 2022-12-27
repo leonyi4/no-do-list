@@ -1,10 +1,14 @@
 import UploadIcon from "@mui/icons-material/Upload";
 import { format } from 'date-fns';
 import React, { useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 const Form = (props) => {
   const [selected, setSelected] = useState();
 
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
 
   const titleRef = useRef("");
   const descRef = useRef("");
@@ -24,10 +28,20 @@ const Form = (props) => {
     console.log(toDos)
 
     props.onAddToDos(toDos);
+
+    titleRef.current.value= '';
+    descRef.current.value= '';
+    setSelected();
+    document.getElementById('high').checked = false;
+    document.getElementById('middle').checked = false;
+    document.getElementById('low').checked = false;
+
   };
 
+  const cName = inView ? "form fade-in" : "toDo";
+
   return (
-    <form onSubmit={submitHandler} id="toDoForm" className="form">
+    <form onSubmit={submitHandler} id="toDoForm" className={cName} ref={ref}>
       <label htmlFor="newToDo-Title">Enter the To Do Title</label>
       <div className="newToDo-Title">
         <input
@@ -75,7 +89,7 @@ const Form = (props) => {
         <label htmlFor="low">Low</label>
       </div>
       <button className="submit">
-        <UploadIcon />
+        <UploadIcon sx={{borderRadius:'5px'}} />
       </button>
     </form>
   );
