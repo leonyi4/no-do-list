@@ -4,8 +4,7 @@ import { useInView } from "react-intersection-observer";
 
 const ToDo = (props) => {
   const handleDelete = (event) => {
-    console.log(props.completed);
-    // props.onHandleDelete(props);
+    props.onHandleDelete(props.id);
   };
 
   const { ref, inView } = useInView({
@@ -21,9 +20,9 @@ const ToDo = (props) => {
       <h3 className="toDoDesc">{props.desc}</h3>
       <p className="toDoDate">{props.date}</p>
       <p>{props.completed}</p>
-      {/* <button onClick={handleDelete}>
+      <button onClick={handleDelete}>
         <DeleteForeverIcon />
-      </button> */}
+      </button>
     </li>
   );
 };

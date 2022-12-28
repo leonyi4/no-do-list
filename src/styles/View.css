@@ -2,6 +2,7 @@
 
 .view {
   background-color: rgb(54, 85, 209);
+  min-height: 100vh;
 }
 
 h2,h3,p{

@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import axios from "../api/post";
 import ToDoList from "../components/ToDoList";
 import "../styles/View.css";
 
@@ -7,17 +7,14 @@ const View = () => {
   const [toDos, setToDos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const listRef = useRef();
-  const [width, setWidth] = useState();
-  const [height, setHeight] = useState();
+  // const listRef = useRef();
+  // const [height, setHeight] = useState(929);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const { data: response } = await axios.get(
-          "https://todolist-9f57e-default-rtdb.asia-southeast1.firebasedatabase.app/toDos.json"
-        );
+        const { data: response } = await axios.get("/toDos.json");
         const loadedToDos = [];
         for (const key in response) {
           loadedToDos.push({
@@ -39,42 +36,45 @@ const View = () => {
     fetchData();
   }, []);
 
-  const getListSize = () => {
-    const newWidth = listRef.current.clientWidth;
-    setWidth(newWidth);
+  // const getListSize = () => {
+  //   const newHeight = listRef.current.clientHeight;
+  //   console.log(listRef.current.clientHeight)
 
-    const newHeight = listRef.current.clientWidth;
-    setHeight(newHeight);
-  };
-
-  useEffect(() => {
-    getListSize();
-  }, [toDos]);
-
-  // const deleteHandler = (toDo) => {
-  //   console.log(toDo);
-  //   const newToDo = {
-  //     id: toDo.id,
-  //     title: toDo.title,
-  //     desc: toDo.desc,
-  //     importance: toDo.importance,
-  //     date: toDo.date,
-  //     completed: true,
-  //   };
-
-  //   axios
-  //     .put(
-  //       `https://todolist-9f57e-default-rtdb.asia-southeast1.firebasedatabase.app/toDos/${toDo.id}`,
-  //       newToDo
-  //     )
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.log(err));
   // };
 
+  // useEffect(() => {
+  //   getListSize();
+  // }, [toDos]);
+
+  const deleteHandler = (id) => {
+    axios
+      .delete(`/toDos/${id}.json`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type, Accept",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+      })
+      .then()
+      .catch((err) => {
+        if (err.response) {
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.header);
+        } else {
+          console.log(`Error: ${err.message}`);
+        }
+      });
+
+    const toDoList = toDos.filter((toDo) => toDo.id !== id);
+    setToDos(toDoList);
+  };
+
   return (
-    <div className="view" style={{height: `${height}`}} ref={listRef} >
+    <div className="view" >
       {isLoading && <div>Loading</div>}
-      {!isLoading && <ToDoList /*onHandleDelete={deleteHandler}*/ toDos={toDos} />}
+      {!isLoading && <ToDoList onHandleDelete={deleteHandler} toDos={toDos} />}
     </div>
   );
 };

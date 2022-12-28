@@ -16,7 +16,7 @@ const ToDoList = (props) => {
         title={toDo.title}
         desc={toDo.desc}
         importance={toDo.importance}
-        // onHandleDelete={props.onHandleDelete}
+        onHandleDelete={props.onHandleDelete}
       />
     ));
 

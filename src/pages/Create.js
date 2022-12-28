@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import axios from "../api/post";
 import Form from "../components/Form";
 import "../styles/Create.css";
 
@@ -7,7 +7,7 @@ const Create = () => {
   const addToDoHandler = (toDo) => {
     axios
       .post(
-        "https://todolist-9f57e-default-rtdb.asia-southeast1.firebasedatabase.app/toDos.json",
+        "/toDos.json",
         {
           title: toDo.title,
           desc: toDo.desc,
