@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../api/post";
 import ToDoList from "../components/ToDoList";
 import "../styles/View.css";
@@ -7,8 +7,6 @@ const View = () => {
   const [toDos, setToDos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const listRef = useRef();
-  // const [height, setHeight] = useState(929);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,15 +34,7 @@ const View = () => {
     fetchData();
   }, []);
 
-  // const getListSize = () => {
-  //   const newHeight = listRef.current.clientHeight;
-  //   console.log(listRef.current.clientHeight)
 
-  // };
-
-  // useEffect(() => {
-  //   getListSize();
-  // }, [toDos]);
 
   const deleteHandler = (id) => {
     axios

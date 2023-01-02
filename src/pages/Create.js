@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../api/post";
 import Form from "../components/Form";
 import "../styles/Create.css";
 
 const Create = () => {
+  const history = useNavigate();
+  
   const addToDoHandler = (toDo) => {
     axios
       .post(
@@ -20,6 +23,9 @@ const Create = () => {
       })
       .catch(function (error) {       
       });
+
+      history('/view');
+
   };
 
   return (
