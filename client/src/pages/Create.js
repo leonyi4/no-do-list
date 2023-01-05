@@ -16,7 +16,6 @@ const Create = () => {
           desc: toDo.desc,
           importance: toDo.importance,
           date: toDo.date,
-          completed: toDo.completed
         }
       )
       .then(function (response) {
