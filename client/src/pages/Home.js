@@ -1,18 +1,11 @@
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Fade } from "@mui/material";
-import React, { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 
 const Home = () => {
-  const [isClicked, setIsClicked] = useState(false);
   let navigate = useNavigate();
 
-  const createClickHandler = (event) => {
-    setIsClicked((prev) => !prev);
-    navigate("/create");
-  };
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -37,7 +30,7 @@ const Home = () => {
           />
         </div>
         <div>
-          <button className="createBtn" onClick={createClickHandler}>
+          <button className="createBtn" onClick={e => navigate("/create")}>
             Create
           </button>
         </div>
