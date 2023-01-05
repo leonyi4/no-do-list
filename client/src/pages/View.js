@@ -7,34 +7,44 @@ const View = () => {
   const [toDos, setToDos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const { data: response } = await axios.get("/toDos.json");
+    fetch("http://localhost:5000/todos")
+      .then((res) => res.json())
+      .then((res) => {
         const loadedToDos = [];
-        for (const key in response) {
+        for (const key in res) {
           loadedToDos.push({
-            id: key,
-            title: response[key].title,
-            desc: response[key].desc,
-            importance: response[key].importance,
-            date: response[key].date,
-            completed: response[key].completed,
+            key: res[key].todo_id,
+            ...res[key],
           });
         }
+        console.log(loadedToDos);
         setToDos(loadedToDos);
-      } catch (error) {
-        console.error(error.message);
-      }
-      setIsLoading(false);
-    };
-
-    fetchData();
+      })
+      .catch((err) => console.log(err.message));
   }, []);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const { data: response } = await axios.get("/toDos.json");
+  //       const loadedToDos = [];
+  //       for (const key in response) {
+  //         loadedToDos.push({
+  //           id: key,
+  //           ...response[key]
+  //         });
+  //       }
+  //       setToDos(loadedToDos);
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     }
+  //     setIsLoading(false);
+  //   };
 
+  //   fetchData();
+  // }, []);
 
   const deleteHandler = (id) => {
     axios
@@ -62,7 +72,7 @@ const View = () => {
   };
 
   return (
-    <div className="view" >
+    <div className="view">
       {isLoading && <div>Loading</div>}
       {!isLoading && <ToDoList onHandleDelete={deleteHandler} toDos={toDos} />}
     </div>
