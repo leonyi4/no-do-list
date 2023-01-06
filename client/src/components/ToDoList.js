@@ -10,11 +10,11 @@ const ToDoList = (props) => {
     .map((toDo) => (
       <ToDo
         completed={toDo.completed}
-        id={toDo.id}
-        key={toDo.id}
+        id={toDo.todo_id}
+        key={toDo.key}
         date={toDo.date}
         title={toDo.title}
-        desc={toDo.desc}
+        desc={toDo.description}
         importance={toDo.importance}
         onHandleDelete={props.onHandleDelete}
       />

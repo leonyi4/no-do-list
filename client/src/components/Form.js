@@ -1,5 +1,4 @@
 import UploadIcon from "@mui/icons-material/Upload";
-import { format } from 'date-fns';
 import React, { useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -16,15 +15,13 @@ const Form = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const date = format(new Date(), "MMMM dd, yyyy pp");
+
 
     const toDos = {
       title: titleRef.current.value,
       desc: descRef.current.value,
       importance: selected,
-      date: date,
     };
-    console.log(toDos)
 
     props.onAddToDos(toDos);
 

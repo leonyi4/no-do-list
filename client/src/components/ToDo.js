@@ -7,18 +7,21 @@ const ToDo = (props) => {
     props.onHandleDelete(props.id);
   };
 
+  const date = props.date.substr(0, 10);
+
   const { ref, inView } = useInView({
     threshold: 0,
   });
 
   const cName = inView ? "toDo fade-in" : "toDo";
-  
+  console.log(`${props.id}, ${props.importance}`);
+
   return (
     <li className={cName} ref={ref}>
       <h2 className="toDoTitle">{props.title}</h2>
       <span className="line"></span>
       <h3 className="toDoDesc">{props.desc}</h3>
-      <p className="toDoDate">{props.date}</p>
+      <p className="toDoDate">{`Created on ${date}`}</p>
       <p>{props.completed}</p>
       <button onClick={handleDelete}>
         <DeleteForeverIcon />

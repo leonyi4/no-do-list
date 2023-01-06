@@ -14,11 +14,10 @@ const View = () => {
         const loadedToDos = [];
         for (const key in res) {
           loadedToDos.push({
-            key: res[key].todo_id,
+            key: res[key].todo_id + res[key].title,
             ...res[key],
           });
         }
-        console.log(loadedToDos);
         setToDos(loadedToDos);
       })
       .catch((err) => console.log(err.message));
@@ -47,27 +46,37 @@ const View = () => {
   // }, []);
 
   const deleteHandler = (id) => {
-    axios
-      .delete(`/toDos/${id}.json`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type, Accept",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        },
-      })
-      .then()
-      .catch((err) => {
-        if (err.response) {
-          console.log(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.header);
-        } else {
-          console.log(`Error: ${err.message}`);
-        }
-      });
+    // axios
+    //   .delete(`/toDos/${id}.json`, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Access-Control-Allow-Origin": "*",
+    //       "Access-Control-Allow-Headers": "Content-Type, Accept",
+    //       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    //     },
+    //   })
+    //   .then()
+    //   .catch((err) => {
+    //     if (err.response) {
+    //       console.log(err.response.data);
+    //       console.log(err.response.status);
+    //       console.log(err.response.header);
+    //     } else {
+    //       console.log(`Error: ${err.message}`);
+    //     }
+    //   });
 
-    const toDoList = toDos.filter((toDo) => toDo.id !== id);
+
+    fetch(`http://localhost:5000/todos/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        console.log(id)
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+
+    const toDoList = toDos.filter((toDo) => toDo.todo_id !== id);
     setToDos(toDoList);
   };
 
