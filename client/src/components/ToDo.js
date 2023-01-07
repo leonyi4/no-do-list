@@ -1,7 +1,8 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
+import { Button } from "@mui/material";
 import React from "react";
 import { useInView } from "react-intersection-observer";
+import EditToDo from "./EditToDo";
 
 const ToDo = (props) => {
   const handleDelete = (event) => {
@@ -27,12 +28,18 @@ const ToDo = (props) => {
       <p className="toDoDate">{`Created on ${date}`}</p>
       <p>{props.completed}</p>
       <div className="buttons">
-        <button onClick={handleEdit}>
-          <EditIcon />
-        </button>
-        <button onClick={handleDelete}>
+        <EditToDo id={props.id} desc={props.desc} />
+        <Button
+          variant="outlined"
+          sx={{
+            color: "black",
+            borderColor: "black",
+            backgroundColor: "#F0F0F0",
+          }}
+          onClick={handleDelete}
+        >
           <DeleteForeverIcon />
-        </button>
+        </Button>
       </div>
     </li>
   );

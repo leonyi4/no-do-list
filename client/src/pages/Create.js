@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../api/post";
 import Form from "../components/Form";
 import "../styles/Create.css";
 
@@ -38,6 +37,7 @@ const Create = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err.message));
 
+      navigate('/view')
 
   };
 
