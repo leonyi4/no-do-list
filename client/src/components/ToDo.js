@@ -9,9 +9,6 @@ const ToDo = (props) => {
     props.onHandleDelete(props.id);
   };
 
-  const handleEdit = (event) => {
-    props.onEdit(props.id);
-  };
   const date = props.date.substr(0, 10);
 
   const { ref, inView } = useInView({
@@ -28,7 +25,7 @@ const ToDo = (props) => {
       <p className="toDoDate">{`Created on ${date}`}</p>
       <p>{props.completed}</p>
       <div className="buttons">
-        <EditToDo id={props.id} desc={props.desc} />
+        <EditToDo title={props.title} id={props.id} desc={props.desc} />
         <Button
           variant="outlined"
           sx={{

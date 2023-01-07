@@ -1,4 +1,4 @@
-import ReorderIcon from '@mui/icons-material/Reorder';
+// import ReorderIcon from '@mui/icons-material/Reorder';
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Nav.css";
@@ -8,9 +8,9 @@ const Nav = () => {
   return (
     <nav>
       <h2>Picture</h2>
-      <div className="toggleButton">
+      {/* <div className="toggleButton">
         <button><ReorderIcon/></button>
-      </div>
+      </div> */}
       <ul className="nav-links">
         <li>
           <Link to="/">Home</Link>

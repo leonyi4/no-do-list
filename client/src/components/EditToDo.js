@@ -1,5 +1,6 @@
+import { ThemeProvider } from "@emotion/react";
 import EditIcon from "@mui/icons-material/Edit";
-import { Divider, TextField } from "@mui/material";
+import { createTheme, Divider, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -12,12 +13,18 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "50rem",
-  height: "15rem",
+  height: "17rem",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Roboto Mono", "monospace"].join(","),
+  },
+});
 
 const EditToDo = (props) => {
   const [open, setOpen] = useState(false);
@@ -28,12 +35,21 @@ const EditToDo = (props) => {
     setNewDesc(props.desc);
   };
 
-  const clickHandler = () => {
-    console.log(newDesc);
+  const clickHandler = (e) => {
+    const body = { description: newDesc };
+    fetch(`http://localhost:5000/todos/${props.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err.message));
+
+    window.location = "/view";
   };
-  
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Button
         variant="outlined"
         sx={{
@@ -52,12 +68,21 @@ const EditToDo = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h2" component="h2">
+          <Typography
+            fontWeight={700}
+            id="modal-modal-title"
+            variant="h3"
+            component="h2"
+          >
             Edit to Do
           </Typography>
           <Divider />
+          <Typography
+          fontWeight={500}
+            id="modal-modal-description"
+            variant="h6"
+          >{`title: ${props.title}`}</Typography>
           <Divider />
-          {/* <Input multiline rows={3} placeholder="Change descripton" fullWidth={true} /> */}
           <TextField
             id="outlined-multiline-flexible"
             label="Description"
@@ -93,7 +118,7 @@ const EditToDo = (props) => {
           </Button>
         </Box>
       </Modal>
-    </>
+    </ThemeProvider>
   );
 };
 
