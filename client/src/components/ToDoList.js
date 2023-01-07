@@ -10,6 +10,7 @@ const ToDoList = (props) => {
     .map((toDo) => (
       <ToDo
         completed={toDo.completed}
+        onEdit= {props.onHandleEdit}
         id={toDo.todo_id}
         key={toDo.key}
         date={toDo.date}

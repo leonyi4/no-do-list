@@ -1,4 +1,5 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
 import React from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -7,6 +8,9 @@ const ToDo = (props) => {
     props.onHandleDelete(props.id);
   };
 
+  const handleEdit = (event) => {
+    props.onEdit(props.id);
+  };
   const date = props.date.substr(0, 10);
 
   const { ref, inView } = useInView({
@@ -14,7 +18,6 @@ const ToDo = (props) => {
   });
 
   const cName = inView ? "toDo fade-in" : "toDo";
-  console.log(`${props.id}, ${props.importance}`);
 
   return (
     <li className={cName} ref={ref}>
@@ -23,9 +26,14 @@ const ToDo = (props) => {
       <h3 className="toDoDesc">{props.desc}</h3>
       <p className="toDoDate">{`Created on ${date}`}</p>
       <p>{props.completed}</p>
-      <button onClick={handleDelete}>
-        <DeleteForeverIcon />
-      </button>
+      <div className="buttons">
+        <button onClick={handleEdit}>
+          <EditIcon />
+        </button>
+        <button onClick={handleDelete}>
+          <DeleteForeverIcon />
+        </button>
+      </div>
     </li>
   );
 };

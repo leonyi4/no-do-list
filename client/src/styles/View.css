@@ -38,3 +38,11 @@ h2,h3,p{
 .toDoDate{
   font-size: small;
 }
+
+.buttons{
+  margin: 5px;
+  padding: 5px;
+  display: flex; 
+  justify-content: center;
+  gap: 10px
+}

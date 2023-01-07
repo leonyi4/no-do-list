@@ -23,56 +23,11 @@ const View = () => {
       .catch((err) => console.log(err.message));
   }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const { data: response } = await axios.get("/toDos.json");
-  //       const loadedToDos = [];
-  //       for (const key in response) {
-  //         loadedToDos.push({
-  //           id: key,
-  //           ...response[key]
-  //         });
-  //       }
-  //       setToDos(loadedToDos);
-  //     } catch (error) {
-  //       console.error(error.message);
-  //     }
-  //     setIsLoading(false);
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   const deleteHandler = (id) => {
-    // axios
-    //   .delete(`/toDos/${id}.json`, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Origin": "*",
-    //       "Access-Control-Allow-Headers": "Content-Type, Accept",
-    //       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    //     },
-    //   })
-    //   .then()
-    //   .catch((err) => {
-    //     if (err.response) {
-    //       console.log(err.response.data);
-    //       console.log(err.response.status);
-    //       console.log(err.response.header);
-    //     } else {
-    //       console.log(`Error: ${err.message}`);
-    //     }
-    //   });
-
-
     fetch(`http://localhost:5000/todos/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
-        console.log(id)
-        console.log(res);
       })
       .catch((err) => console.log(err));
 
@@ -80,10 +35,14 @@ const View = () => {
     setToDos(toDoList);
   };
 
+  const editHandler = (id) =>{
+    console.log(id)
+  }
+
   return (
     <div className="view">
       {isLoading && <div>Loading</div>}
-      {!isLoading && <ToDoList onHandleDelete={deleteHandler} toDos={toDos} />}
+      {!isLoading && <ToDoList onHandleEdit={editHandler} onHandleDelete={deleteHandler} toDos={toDos} />}
     </div>
   );
 };
